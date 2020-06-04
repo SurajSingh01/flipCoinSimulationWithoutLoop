@@ -99,6 +99,58 @@ echo "HTT % = $(( (${triplet[HTT]} * 100 ) / $ttotal))"
 echo "TTT % = $(( (${triplet[TTT]} * 100 ) / $ttotal))"
 }
 
+function shorting() {
+echo "*************Shorting**********"
+   sortedsinglet=`for num1 in ${!singlet[@]}
+   do
+      echo -e ${singlet[$num1]}
+   done | awk '{print $1}' | sort -n`
+echo "sorted singlet : " $sortedsinglet
+
+   sorteddoublet=`for num2 in ${!doublet[@]}
+   do
+      echo -e ${doublet[$num2]}
+   done | awk '{print $1}' | sort -n`
+echo "sorted doublet : " $sorteddoublet
+
+   sortedtriplet=`for num3 in ${!triplet[@]}
+   do
+      echo -e ${triplet[$num3]}
+   done | awk '{print $1}' | sort -n`
+echo "sorted triplet : " $sortedtriplet
+}
+
+function winner () {
+echo "****************Winner********************"
+for num1 in ${!singlet[@]}
+   do
+      if [ ${singlet[$num1]} -eq 15 ]
+      then
+         winnersinglet=$num1
+      fi
+   done
+   for num2 in ${!doublet[@]}
+   do
+      if [ ${doublet[$num2]} -eq 15 ]
+      then
+         winnerdoublet=$num2
+      fi
+   done
+   for num3 in ${!triplet[@]}
+   do
+      if [ ${triplet[$num3]} -eq 15 ]
+      then
+         winnertriplet=$num3
+      fi
+   done
+echo "Singlet Winner : $winnersinglet"
+echo "Doublet Winner : $winnerdoublet"
+echo "Triplet Winner : $winnertriplet"
+}
+
+
 single
 double
 triple
+shorting
+winner
